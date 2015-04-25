@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38BCD5DF1AEB650400693AAE /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BCD5DE1AEB650400693AAE /* SettingsViewController.m */; };
+		38BCD5E21AEB6DA800693AAE /* ConfigurationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BCD5E11AEB6DA800693AAE /* ConfigurationHelper.m */; };
 		38E848CE1AE9B90500EC67A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E848CD1AE9B90500EC67A1 /* main.m */; };
 		38E848D11AE9B90500EC67A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E848D01AE9B90500EC67A1 /* AppDelegate.m */; };
 		38E848D71AE9B90500EC67A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38E848D51AE9B90500EC67A1 /* Main.storyboard */; };
@@ -35,6 +37,10 @@
 
 /* Begin PBXFileReference section */
 		03C2FBA98EB6863FBE4A0485 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		38BCD5DD1AEB650400693AAE /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		38BCD5DE1AEB650400693AAE /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		38BCD5E01AEB6DA800693AAE /* ConfigurationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurationHelper.h; sourceTree = "<group>"; };
+		38BCD5E11AEB6DA800693AAE /* ConfigurationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurationHelper.m; sourceTree = "<group>"; };
 		38E848C81AE9B90500EC67A1 /* RedditReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RedditReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38E848CC1AE9B90500EC67A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38E848CD1AE9B90500EC67A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -171,6 +177,8 @@
 				38F822C21AE9FBB800AF1E41 /* RedditTableViewController.m */,
 				38F822C41AEB00DE00AF1E41 /* RedditArticleTableViewCell.h */,
 				38F822C51AEB00DE00AF1E41 /* RedditArticleTableViewCell.m */,
+				38BCD5DD1AEB650400693AAE /* SettingsViewController.h */,
+				38BCD5DE1AEB650400693AAE /* SettingsViewController.m */,
 			);
 			name = VIewsControllers;
 			sourceTree = "<group>";
@@ -200,6 +208,8 @@
 				38F822B91AE9E1E700AF1E41 /* RedditHTTPClient.m */,
 				38F822C91AEB14F400AF1E41 /* Utils.h */,
 				38F822CA1AEB14F400AF1E41 /* Utils.m */,
+				38BCD5E01AEB6DA800693AAE /* ConfigurationHelper.h */,
+				38BCD5E11AEB6DA800693AAE /* ConfigurationHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -352,10 +362,12 @@
 				38E848D11AE9B90500EC67A1 /* AppDelegate.m in Sources */,
 				38F822C01AE9F4C300AF1E41 /* Entry.m in Sources */,
 				38F822BD1AE9F26500AF1E41 /* RedditManager.m in Sources */,
+				38BCD5DF1AEB650400693AAE /* SettingsViewController.m in Sources */,
 				38F822CB1AEB14F400AF1E41 /* Utils.m in Sources */,
 				38F822C31AE9FBB800AF1E41 /* RedditTableViewController.m in Sources */,
 				38F822C61AEB00DE00AF1E41 /* RedditArticleTableViewCell.m in Sources */,
 				38E848CE1AE9B90500EC67A1 /* main.m in Sources */,
+				38BCD5E21AEB6DA800693AAE /* ConfigurationHelper.m in Sources */,
 				38F822BA1AE9E1E700AF1E41 /* RedditHTTPClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

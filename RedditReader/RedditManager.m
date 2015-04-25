@@ -9,26 +9,51 @@
 #import "RedditManager.h"
 #import "RedditHTTPClient.h"
 #import "Entry.h"
+#import "ConfigurationHelper.h"
 
 @interface RedditManager()
 
 @property (strong,atomic) NSString *afterEntry;
+@property (strong,atomic) NSString *category;
+@property (strong,atomic) NSString *period;
 
 @end
 
 @implementation RedditManager
 
+const int ENTRIES_PER_PAGE = 40;
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        _category = [[ConfigurationHelper sharedInstance] currentCategory];
+        _period = [[ConfigurationHelper sharedInstance] currentTimePeriod];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(settingsUpdated:)
+                                                     name:@"settingsUpdated"
+                                                   object:nil];
+    }
+    
+    return self;
+}
+
+-(void)settingsUpdated:(NSNotification *)notification {
+    _category = [[ConfigurationHelper sharedInstance] currentCategory];
+    _period = [[ConfigurationHelper sharedInstance] currentTimePeriod];
+}
+
 -(void)synchronizeEntriesAndReset:(BOOL)reset {
     
-    //Should be configurable
-    NSString *category = @"top";
-    int entriesPerPage = 20;
-    NSString *period = @"day";
+    if(!reset && self.afterEntry == nil) {
+        //Send empty array to update the screen
+        [self.delegate didGetNewEntries:[[NSArray alloc]init]];
+    }
     
     NSString *after = reset ? nil : self.afterEntry;
     NSLog(@"%@",after);
     
-    [[RedditHTTPClient sharedInstance] fetchEntriesForCategory:category withEntriesPerPage:entriesPerPage withPeriod:period afterEntry:after completioBlock:^(NSDictionary *response, NSError *error) {
+    [[RedditHTTPClient sharedInstance] fetchEntriesForCategory:_category withEntriesPerPage:ENTRIES_PER_PAGE withPeriod:_period afterEntry:after completioBlock:^(NSDictionary *response, NSError *error) {
         
         if(error == nil) {
             NSMutableArray *entriesJSON = [[NSMutableArray alloc]initWithCapacity:1];

@@ -172,10 +172,10 @@
             </objects>
             <point key="canvasLocation" x="876" y="-117"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings-->
         <scene sceneID="54b-6H-R14">
             <objects>
-                <viewController id="rhm-Db-iuB" sceneMemberID="viewController">
+                <viewController title="Settings" id="rhm-Db-iuB" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="i4i-1q-zGU"/>
                         <viewControllerLayoutGuide type="bottom" id="QEy-If-EX6"/>
@@ -183,8 +183,94 @@
                     <view key="view" contentMode="scaleToFill" id="0MG-aV-cfq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qJv-ie-Wfn">
+                                <rect key="frame" x="5" y="126" width="590" height="29"/>
+                                <segments>
+                                    <segment title="Top"/>
+                                    <segment title="Controversial"/>
+                                    <segment title="New"/>
+                                    <segment title="Hot"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2A-iB-N0G">
+                                <rect key="frame" x="253" y="79" width="94" height="32"/>
+                                <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Period" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDx-jJ-E2R">
+                                <rect key="frame" x="234" y="224" width="132" height="32"/>
+                                <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="c3S-iz-pej">
+                                <rect key="frame" x="5" y="269" width="590" height="29"/>
+                                <segments>
+                                    <segment title="Hour"/>
+                                    <segment title="Day"/>
+                                    <segment title="Week"/>
+                                    <segment title="Month"/>
+                                    <segment title="Year"/>
+                                    <segment title="All"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" red="0.51466713180000001" green="0.71689121050000004" blue="0.86491871840000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="zDx-jJ-E2R" secondAttribute="centerX" id="0t2-W0-Ugc"/>
+                            <constraint firstAttribute="centerX" secondItem="qJv-ie-Wfn" secondAttribute="centerX" id="CYy-Iw-gjf"/>
+                            <constraint firstItem="m2A-iB-N0G" firstAttribute="top" secondItem="i4i-1q-zGU" secondAttribute="bottom" constant="15" id="FfG-nF-tXu"/>
+                            <constraint firstItem="c3S-iz-pej" firstAttribute="leading" secondItem="0MG-aV-cfq" secondAttribute="leading" constant="5" id="Foy-oS-55G"/>
+                            <constraint firstAttribute="centerX" secondItem="m2A-iB-N0G" secondAttribute="centerX" id="Nmc-gt-GCX"/>
+                            <constraint firstAttribute="trailing" secondItem="qJv-ie-Wfn" secondAttribute="trailing" constant="5" id="fVX-ny-x2M"/>
+                            <constraint firstItem="zDx-jJ-E2R" firstAttribute="top" secondItem="qJv-ie-Wfn" secondAttribute="bottom" constant="70" id="kGS-OG-Nfg"/>
+                            <constraint firstItem="c3S-iz-pej" firstAttribute="top" secondItem="zDx-jJ-E2R" secondAttribute="bottom" constant="13" id="kSd-fZ-7wU"/>
+                            <constraint firstItem="qJv-ie-Wfn" firstAttribute="top" secondItem="m2A-iB-N0G" secondAttribute="bottom" constant="15" id="o7X-4g-spU"/>
+                            <constraint firstAttribute="trailing" secondItem="c3S-iz-pej" secondAttribute="trailing" constant="5" id="w5U-iJ-qby"/>
+                            <constraint firstItem="qJv-ie-Wfn" firstAttribute="leading" secondItem="0MG-aV-cfq" secondAttribute="leading" constant="5" id="xwW-jF-gOI"/>
+                        </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="IVW-UT-szo">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="pI0-Ga-Wnx">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancelEdition:" destination="rhm-Db-iuB" id="A3z-9K-Cng"/>
+                            </connections>
+                        </barButtonItem>
+                        <view key="titleView" contentMode="scaleToFill" id="T2S-Cf-RPA">
+                            <rect key="frame" x="180" y="6" width="240" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rm8-AZ-QH4">
+                                    <rect key="frame" x="78" y="-4" width="85" height="35"/>
+                                    <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="27"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="centerX" secondItem="rm8-AZ-QH4" secondAttribute="centerX" id="GDF-fN-9hS"/>
+                                <constraint firstAttribute="centerY" secondItem="rm8-AZ-QH4" secondAttribute="centerY" constant="3" id="Zvr-H0-mWA"/>
+                            </constraints>
+                        </view>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="d2n-bM-H6Y">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="finishEdition:" destination="rhm-Db-iuB" id="Pbo-7D-3lW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="categorySegmentedControl" destination="qJv-ie-Wfn" id="OGE-81-ULF"/>
+                        <outlet property="timePeriodSegmentedControl" destination="c3S-iz-pej" id="qX0-AW-HiV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nnX-JQ-SHJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

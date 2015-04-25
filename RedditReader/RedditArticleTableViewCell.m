@@ -51,7 +51,9 @@
 
 -(void) ClickEventOnImage:(id) sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.currentEntry.imageUrl]];
+    if(self.currentEntry.imageUrl != nil && ![self.currentEntry.imageUrl isEqualToString:@""]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.currentEntry.imageUrl]];
+    }
 }
 
 -(void)clearCell {

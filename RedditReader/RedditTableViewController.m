@@ -31,9 +31,20 @@
     _redditManager = [[RedditManager alloc]init];
     _redditManager.delegate = self;
     [_redditManager synchronizeEntriesAndReset:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(settingsUpdated:)
+                                                 name:@"settingsUpdated"
+                                               object:nil];
+}
+
+-(void)settingsUpdated:(NSNotification *)notification {
+    [self refreshTableView];
 }
 
 -(void)refreshTableView {
+    _items = [[NSMutableArray alloc]initWithCapacity:0];
+    [self.tableView reloadData];
     [_redditManager synchronizeEntriesAndReset:YES];
 }
 
@@ -72,7 +83,10 @@
     return 120;
 }
 
+
 #pragma mark Reddit Manager Delegate
+
+
 -(void) didGetNewEntries:(NSArray*)entries {
     [self.refreshControl endRefreshing];
     self.tableView.tableFooterView = nil;
@@ -84,15 +98,5 @@
 -(void) didFailWithError:(NSError*)error {
 
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
