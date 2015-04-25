@@ -44,7 +44,6 @@
                                              initWithTarget:self action:@selector(ClickEventOnImage:)];
     [tapRecognizer setNumberOfTouchesRequired:1];
     [tapRecognizer setDelegate:self];
-    //Don't forget to set the userInteractionEnabled to YES, by default It's NO.
     self.thumbnailImageView.userInteractionEnabled = YES;
     [self.thumbnailImageView addGestureRecognizer:tapRecognizer];
     

@@ -37,9 +37,17 @@
     [_redditManager synchronizeEntriesAndReset:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)loadMoreItems:(int)rowNumber {
+    if(self.items.count - 20 == rowNumber){
+        NSLog(@"COUNT: %lu",(unsigned long)self.items.count);
+        
+        UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [spinner startAnimating];
+        spinner.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 70);
+        self.tableView.tableFooterView = spinner;
+        
+        [_redditManager synchronizeEntriesAndReset:NO];
+    }
 }
 
 #pragma mark - Table view data source
@@ -50,12 +58,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     static NSString *redditCellIdentifier = @"RedditCellIdentifier";
     
     RedditArticleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:redditCellIdentifier];
+    [cell fillCellWithEntry:_items[indexPath.row]];
+    [self loadMoreItems:(int)indexPath.row];
     
-   [cell fillCellWithEntry:_items[indexPath.row]];
     return cell;
 }
 
@@ -66,6 +75,8 @@
 #pragma mark Reddit Manager Delegate
 -(void) didGetNewEntries:(NSArray*)entries {
     [self.refreshControl endRefreshing];
+    self.tableView.tableFooterView = nil;
+    
     [_items addObjectsFromArray:entries];
     [self.tableView reloadData];
 }

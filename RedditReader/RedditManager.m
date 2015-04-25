@@ -10,23 +10,30 @@
 #import "RedditHTTPClient.h"
 #import "Entry.h"
 
-@implementation RedditManager
+@interface RedditManager()
 
+@property (strong,atomic) NSString *afterEntry;
+
+@end
+
+@implementation RedditManager
 
 -(void)synchronizeEntriesAndReset:(BOOL)reset {
     
     //Should be configurable
     NSString *category = @"top";
-    int entriesPerPage = 10;
-    NSString *period = @"hour";
+    int entriesPerPage = 20;
+    NSString *period = @"day";
     
-    [[RedditHTTPClient sharedInstance] fetchEntriesForCategory:category withEntriesPerPage:entriesPerPage withPeriod:period afterEntry:nil completioBlock:^(NSDictionary *response, NSError *error) {
+    NSString *after = reset ? nil : self.afterEntry;
+    NSLog(@"%@",after);
+    
+    [[RedditHTTPClient sharedInstance] fetchEntriesForCategory:category withEntriesPerPage:entriesPerPage withPeriod:period afterEntry:after completioBlock:^(NSDictionary *response, NSError *error) {
         
         if(error == nil) {
             NSMutableArray *entriesJSON = [[NSMutableArray alloc]initWithCapacity:1];
             
             NSDictionary *data = response[@"data"];
-            NSString *after = data[@"after"];
             NSDictionary *children = data[@"children"];
             
             for (NSDictionary *entryToParse in children) {
@@ -40,6 +47,8 @@
                 
                 [entriesJSON addObject:newEntry];
             }
+            
+            self.afterEntry = data[@"after"];
             
             if([self.delegate respondsToSelector:@selector(didGetNewEntries:)]) {
                 [self.delegate didGetNewEntries:entriesJSON];
