@@ -7,3 +7,15 @@
 */
 "timeLabel" = "submitted %@ by %@";
 "commentsLabel" = "%.0f comments";
+"error" = "Error :(";
+"errorToGetArticles" = "An error occurred while retrieving the data.";
+"cancel" = "Cancel";
+"ok" = "Ok";
+
+"MinuteAgo" = "minute ago";
+"MinutesAgo" = "minutes ago";
+"DayAgo" = "day ago";
+"DaysAgo" = "days ago";
+"HourAgo" = "hour ago";
+"HoursAgo" = "hours ago";
+"JustNow" = "just now";

@@ -10,6 +10,7 @@
 #import "ConfigurationHelper.h"
 
 @interface SettingsViewController ()
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *categorySegmentedControl;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *timePeriodSegmentedControl;
@@ -20,6 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSString *category = [[ConfigurationHelper sharedInstance] currentCategory];
+    NSString *period = [[ConfigurationHelper sharedInstance] currentTimePeriod];
+    
+    [self setCategory:category];
+    [self setTimePeriod:period];
 }
 
 
@@ -40,6 +46,38 @@
 
 - (IBAction)cancelEdition:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)setCategory:(NSString*)categroy {
+    int index = 0;
+
+    if([categroy isEqualToString:@"controversial"]) {
+        index = 1;
+    } else if([categroy isEqualToString:@"new"]) {
+        index = 2;
+    } else if([categroy isEqualToString:@"hot"]) {
+        index = 3;
+    }
+    
+    [_categorySegmentedControl setSelectedSegmentIndex:index];
+}
+
+-(void)setTimePeriod:(NSString*)period {
+    int index = 0;
+    
+    if([period isEqualToString:@"day"]) {
+        index = 1;
+    } else if([period isEqualToString:@"week"]) {
+        index = 2;
+    } else if([period isEqualToString:@"month"]) {
+        index = 3;
+    } else if([period isEqualToString:@"year"]) {
+        index = 4;
+    } else if([period isEqualToString:@"all"]) {
+        index = 5;
+    }
+    
+    [_timePeriodSegmentedControl setSelectedSegmentIndex:index];
 }
 
 @end

@@ -43,8 +43,10 @@
 }
 
 -(void)refreshTableView {
+    
     _items = [[NSMutableArray alloc]initWithCapacity:0];
     [self.tableView reloadData];
+
     [_redditManager synchronizeEntriesAndReset:YES];
 }
 
@@ -96,7 +98,22 @@
 }
 
 -(void) didFailWithError:(NSError*)error {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", nil)
+                                                    message:NSLocalizedString(@"errorToGetArticles", nil)
+                                                   delegate:self
+                                          cancelButtonTitle:NSLocalizedString(@"cancel", nil)
+                                          otherButtonTitles:NSLocalizedString(@"ok", nil), nil];
+    
+    [alert show];
+}
 
+#pragma mark Alert View Delegate
+- (void)alertView:(UIAlertView *)alert clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+        if(buttonIndex != alert.cancelButtonIndex)
+        {
+            [_redditManager synchronizeEntriesAndReset:NO];
+        }
 }
 
 @end

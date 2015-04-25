@@ -41,6 +41,7 @@ const int ENTRIES_PER_PAGE = 40;
 -(void)settingsUpdated:(NSNotification *)notification {
     _category = [[ConfigurationHelper sharedInstance] currentCategory];
     _period = [[ConfigurationHelper sharedInstance] currentTimePeriod];
+    _afterEntry = nil;
 }
 
 -(void)synchronizeEntriesAndReset:(BOOL)reset {
