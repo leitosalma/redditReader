@@ -8,6 +8,7 @@
 
 #import "RedditArticleTableViewCell.h"
 #import "Utils.h"
+#import "ConfigurationHelper.h"
 
 @interface RedditArticleTableViewCell()
 
@@ -28,6 +29,9 @@
 }
 
 -(void)fillCellWithEntry:(Entry*)entry {
+
+    BOOL saveImage =  [[ConfigurationHelper sharedInstance] currentSaveImages];
+    
     self.currentEntry = entry;
     [self clearCell];
     self.titleLabel.text = entry.title;
@@ -36,7 +40,20 @@
     NSString *timeString = [Utils stringTimeFromDate:entry.entryDate];
     self.timeAuthorLabel.text = [NSString stringWithFormat:NSLocalizedString(@"timeLabel", nil), timeString, entry.author];
     
-     [self.thumbnailImageView setImageWithURL:[NSURL URLWithString:entry.thumbnailUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    if(!saveImage) {
+        [self.thumbnailImageView setImageWithURL:[NSURL URLWithString:entry.thumbnailUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    } else {
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:entry.thumbnailUrl]];
+        
+        [self.thumbnailImageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            
+            self.thumbnailImageView.image = image;
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+            
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            //Do nothing
+        }];
+    }
     
     
     //Detect image tap, other way is add button over the image and create a IBAction

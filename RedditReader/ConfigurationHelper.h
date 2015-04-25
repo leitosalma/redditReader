@@ -15,7 +15,10 @@
 -(void) saveCategory: (NSString *)category;
 -(NSString*) currentCategory;
 
--(void) saveTimePeriodL: (NSString *)timePeriod;
+-(void) saveTimePeriod: (NSString *)timePeriod;
 -(NSString*) currentTimePeriod;
+
+-(void) saveImages: (BOOL)timePeriod;
+-(BOOL) currentSaveImages;
 
 @end

@@ -14,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *categorySegmentedControl;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *timePeriodSegmentedControl;
+
+@property (weak, nonatomic) IBOutlet UISwitch *saveImageSwitch;
+
 @end
 
 @implementation SettingsViewController
@@ -22,10 +25,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     NSString *category = [[ConfigurationHelper sharedInstance] currentCategory];
+    
     NSString *period = [[ConfigurationHelper sharedInstance] currentTimePeriod];
+    
+    BOOL saveImage =  [[ConfigurationHelper sharedInstance] currentSaveImages];
     
     [self setCategory:category];
     [self setTimePeriod:period];
+    [_saveImageSwitch setOn:saveImage];
 }
 
 
@@ -37,7 +44,9 @@
     
     NSString *timePeriod =[_timePeriodSegmentedControl titleForSegmentAtIndex:_timePeriodSegmentedControl.selectedSegmentIndex];
     
-    [[ConfigurationHelper sharedInstance] saveTimePeriodL:[timePeriod lowercaseString]];
+    [[ConfigurationHelper sharedInstance] saveTimePeriod:[timePeriod lowercaseString]];
+    
+    [[ConfigurationHelper sharedInstance] saveImages:_saveImageSwitch.on];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"settingsUpdated" object:nil];
     

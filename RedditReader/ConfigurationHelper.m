@@ -53,7 +53,7 @@ const NSString *DEFAULT_TIME_PERIOD = @"day";
     return category;
 }
 
--(void) saveTimePeriodL: (NSString *)timePeriod {
+-(void) saveTimePeriod: (NSString *)timePeriod {
     [self.userDefaults setObject:timePeriod forKey:@"time_period"];
     [self.userDefaults synchronize];
 }
@@ -62,6 +62,16 @@ const NSString *DEFAULT_TIME_PERIOD = @"day";
     NSString *timePeriod = [self.userDefaults objectForKey:@"time_period"] == nil ? DEFAULT_TIME_PERIOD : [self.userDefaults objectForKey:@"time_period"];
     
     return timePeriod;
+}
+
+-(void) saveImages: (BOOL)timePeriod {
+    [self.userDefaults setBool:timePeriod forKey:@"save_images"];
+    
+    [self.userDefaults synchronize];
+}
+
+-(BOOL) currentSaveImages {
+    return [self.userDefaults boolForKey:@"save_images"];
 }
 
 @end
