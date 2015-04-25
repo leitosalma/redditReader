@@ -13,7 +13,7 @@
 @implementation RedditManager
 
 
--(void)synchronizeEntries {
+-(void)synchronizeEntriesAndReset:(BOOL)reset {
     
     //Should be configurable
     NSString *category = @"top";

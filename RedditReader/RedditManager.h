@@ -15,7 +15,7 @@
 
 @property (nonatomic, weak) id<RedditManagerDelegate> delegate;
 
--(void)synchronizeEntries;
+-(void)synchronizeEntriesAndReset:(BOOL)reset;
 
 @end
 

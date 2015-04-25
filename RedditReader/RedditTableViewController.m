@@ -13,6 +13,7 @@
 
 @property RedditManager *redditManager;
 @property NSMutableArray *items;
+@property UIRefreshControl *refreshControl;
 
 @end
 
@@ -20,17 +21,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.refreshControl = [[UIRefreshControl alloc]init];
+    self.refreshControl.backgroundColor = [UIColor colorWithRed:131.0/255 green:183.0/255 blue:221.0/255 alpha:0.75];
+    [self.tableView addSubview:self.refreshControl];
+    [self.refreshControl addTarget:self action:@selector(refreshTableView) forControlEvents:UIControlEventValueChanged];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     _items = [[NSMutableArray alloc]initWithCapacity:0];
     _redditManager = [[RedditManager alloc]init];
     _redditManager.delegate = self;
-    [_redditManager synchronizeEntries];
-    
+    [_redditManager synchronizeEntriesAndReset:YES];
+}
+
+-(void)refreshTableView {
+    [_redditManager synchronizeEntriesAndReset:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,6 +65,7 @@
 
 #pragma mark Reddit Manager Delegate
 -(void) didGetNewEntries:(NSArray*)entries {
+    [self.refreshControl endRefreshing];
     [_items addObjectsFromArray:entries];
     [self.tableView reloadData];
 }

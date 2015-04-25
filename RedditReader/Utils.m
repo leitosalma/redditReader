@@ -77,6 +77,10 @@
         finalTimeValue = 1;
         time = NSLocalizedString(@"MinuteAgo",nil);
     }
+    else if(hours == 0 && minutes <=59) {
+        finalTimeValue = minutes;
+        time = NSLocalizedString(@"MinuteAgo",nil);
+    }
     else if (hours == 1){
         finalTimeValue = 1;
         time = NSLocalizedString(@"HourAgo", nil);

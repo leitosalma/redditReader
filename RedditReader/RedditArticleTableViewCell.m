@@ -9,6 +9,12 @@
 #import "RedditArticleTableViewCell.h"
 #import "Utils.h"
 
+@interface RedditArticleTableViewCell()
+
+@property (strong, nonatomic) Entry *currentEntry;
+
+@end
+
 @implementation RedditArticleTableViewCell
 
 - (void)awakeFromNib {
@@ -22,6 +28,7 @@
 }
 
 -(void)fillCellWithEntry:(Entry*)entry {
+    self.currentEntry = entry;
     [self clearCell];
     self.titleLabel.text = entry.title;
     self.commentsLabel.text = [NSString stringWithFormat: NSLocalizedString(@"commentsLabel", nil),entry.commentsCount];
@@ -31,6 +38,21 @@
     
      [self.thumbnailImageView setImageWithURL:[NSURL URLWithString:entry.thumbnailUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
+    
+    //Detect image tap, other way is add button over the image and create a IBAction
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
+                                             initWithTarget:self action:@selector(ClickEventOnImage:)];
+    [tapRecognizer setNumberOfTouchesRequired:1];
+    [tapRecognizer setDelegate:self];
+    //Don't forget to set the userInteractionEnabled to YES, by default It's NO.
+    self.thumbnailImageView.userInteractionEnabled = YES;
+    [self.thumbnailImageView addGestureRecognizer:tapRecognizer];
+    
+}
+
+-(void) ClickEventOnImage:(id) sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.currentEntry.imageUrl]];
 }
 
 -(void)clearCell {
