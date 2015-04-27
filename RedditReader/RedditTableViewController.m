@@ -13,7 +13,6 @@
 
 @property RedditManager *redditManager;
 @property NSMutableArray *items;
-@property UIRefreshControl *refreshControl;
 
 @end
 
@@ -45,8 +44,7 @@
 -(void)refreshTableView {
     
     _items = [[NSMutableArray alloc]initWithCapacity:0];
-    [self.tableView reloadData];
-
+    
     [_redditManager synchronizeEntriesAndReset:YES];
 }
 
