@@ -8,8 +8,8 @@
 
 #import "RedditHTTPClient.h"
 
-NSString* const BASE_URL = @"http://www.reddit.com/";
-NSString* const POSTFIX_URL = @"%@/.json";
+NSString* const BaseUrl = @"http://www.reddit.com/";
+NSString* const Postfix_Url = @"%@/.json";
 
 @implementation RedditHTTPClient
 
@@ -21,7 +21,7 @@ NSString* const POSTFIX_URL = @"%@/.json";
         // Session configuration setup
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
 
-        _sharedInstance = [[RedditHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL] sessionConfiguration:sessionConfiguration];
+        _sharedInstance = [[RedditHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:BaseUrl] sessionConfiguration:sessionConfiguration];
 
         _sharedInstance.responseSerializer = [AFJSONResponseSerializer serializer];
         _sharedInstance.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -32,7 +32,7 @@ NSString* const POSTFIX_URL = @"%@/.json";
 
 -(void)fetchEntriesForCategory:(NSString*)category withEntriesPerPage:(int)entriesCount withPeriod:(NSString*)period afterEntry:(NSString*)afterEntry completioBlock:(CompletionBlock)completionBlock {
     
-    NSString *path =[NSString stringWithFormat:POSTFIX_URL,category];
+    NSString *path =[NSString stringWithFormat:Postfix_Url,category];
     
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc]initWithCapacity:1];
     [parameters setObject:period forKey:@"t"];

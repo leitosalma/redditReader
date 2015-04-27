@@ -16,8 +16,8 @@
 
 @implementation ConfigurationHelper
 
-const NSString *DEFAULT_CATEGORY = @"top";
-const NSString *DEFAULT_TIME_PERIOD = @"day";
+const NSString *DefaultCategory = @"top";
+const NSString *DefaultTimePeriod = @"day";
 
 - (id)init
 {
@@ -48,7 +48,7 @@ const NSString *DEFAULT_TIME_PERIOD = @"day";
 }
 
 -(NSString*) currentCategory {
-    NSString *category = [self.userDefaults objectForKey:@"category"] == nil ? DEFAULT_CATEGORY : [self.userDefaults objectForKey:@"category"];
+    NSString *category = [self.userDefaults objectForKey:@"category"] == nil ? DefaultCategory : [self.userDefaults objectForKey:@"category"];
 
     return category;
 }
@@ -59,7 +59,7 @@ const NSString *DEFAULT_TIME_PERIOD = @"day";
 }
 
 -(NSString*) currentTimePeriod {
-    NSString *timePeriod = [self.userDefaults objectForKey:@"time_period"] == nil ? DEFAULT_TIME_PERIOD : [self.userDefaults objectForKey:@"time_period"];
+    NSString *timePeriod = [self.userDefaults objectForKey:@"time_period"] == nil ? DefaultTimePeriod : [self.userDefaults objectForKey:@"time_period"];
     
     return timePeriod;
 }
